@@ -41,7 +41,6 @@ Sterownik IPMI mo¿e byæ dostarczony przez sterownik Intel IPMI
 Summary:	MIB database
 Summary(pl):	Baza danych MIB
 Group:		Applications/System
-#License:	AS-IS
 Requires:	net-snmp-mibs
 
 %description mibs
