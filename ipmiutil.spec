@@ -1,18 +1,16 @@
 Summary:	IPMI Management Utilities
 Summary(pl):	Narzêdzia zarz±dzaj±ce IPMI
 Name:		ipmiutil
-Version:	1.5.8
-Release:	0.10
+Version:	1.7.10
+Release:	0.1
 License:	BSD
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	04754de22f71a6bbd534d5dd6a595034
-Patch0:		ipmiutil-am.patch
+# Source0-md5:	a4b758979a1c514564dca286c74d722e
+Patch0:		%{name}-am.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	freeipmi-devel
-Requires:	freeipmi-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		mibsdir		/usr/share/snmp/mibs
@@ -57,6 +55,8 @@ Ten pakiet zawiera pliki MIB od Intela:
 %setup -q
 %patch0 -p1
 
+rm -f lib/lib*.a*
+
 %build
 %{__aclocal}
 %{__autoconf}
@@ -81,16 +81,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README TODO ChangeLog doc/UserGuide doc/checksel
-%attr(755,root,root) %{_sbindir}/wdt
-%attr(755,root,root) %{_sbindir}/icmd
-%attr(755,root,root) %{_sbindir}/showsel
-%attr(755,root,root) %{_sbindir}/tmconfig
+%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/UserGuide doc/checksel
 %attr(755,root,root) %{_sbindir}/alarms
+%attr(755,root,root) %{_sbindir}/bmchealth
+%attr(755,root,root) %{_sbindir}/fruconfig
+%attr(755,root,root) %{_sbindir}/getevent
+%attr(755,root,root) %{_sbindir}/hwreset
+%attr(755,root,root) %{_sbindir}/icmd
+%attr(755,root,root) %{_sbindir}/idiscover
+%attr(755,root,root) %{_sbindir}/isolconsole
 %attr(755,root,root) %{_sbindir}/pefconfig
 %attr(755,root,root) %{_sbindir}/sensor
-%attr(755,root,root) %{_sbindir}/fruconfig
-%attr(755,root,root) %{_sbindir}/hwreset
+%attr(755,root,root) %{_sbindir}/showsel
+%attr(755,root,root) %{_sbindir}/tmconfig
+%attr(755,root,root) %{_sbindir}/wdt
+%attr(755,root,root) %{_sbindir}/xmlconfig
 %{_mandir}/man8/*
 
 %files mibs
