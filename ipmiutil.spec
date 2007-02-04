@@ -1,12 +1,12 @@
 Summary:	IPMI Management Utilities
 Summary(pl):	Narzêdzia zarz±dzaj±ce IPMI
 Name:		ipmiutil
-Version:	1.7.10
-Release:	0.1
+Version:	1.8.2
+Release:	1
 License:	BSD
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	a4b758979a1c514564dca286c74d722e
+# Source0-md5:	b630bbc9de3d9938051d8b555acdff45
 Patch0:		%{name}-am.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
@@ -63,8 +63,10 @@ rm -f lib/lib*.a*
 %{__autoheader}
 %{__automake}
 %configure
-
-%{__make}
+%{__make} -C lib \
+	CC="%{__cc}"
+%{__make} \
+	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -82,20 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README TODO doc/UserGuide doc/checksel
-%attr(755,root,root) %{_sbindir}/alarms
-%attr(755,root,root) %{_sbindir}/bmchealth
-%attr(755,root,root) %{_sbindir}/fruconfig
-%attr(755,root,root) %{_sbindir}/getevent
-%attr(755,root,root) %{_sbindir}/hwreset
-%attr(755,root,root) %{_sbindir}/icmd
-%attr(755,root,root) %{_sbindir}/idiscover
-%attr(755,root,root) %{_sbindir}/isolconsole
-%attr(755,root,root) %{_sbindir}/pefconfig
-%attr(755,root,root) %{_sbindir}/sensor
-%attr(755,root,root) %{_sbindir}/showsel
-%attr(755,root,root) %{_sbindir}/tmconfig
-%attr(755,root,root) %{_sbindir}/wdt
-%attr(755,root,root) %{_sbindir}/xmlconfig
+%attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man8/*
 
 %files mibs
