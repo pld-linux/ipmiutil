@@ -1,5 +1,5 @@
 Summary:	IPMI Management Utilities
-Summary(pl):	Narzêdzia zarz±dzaj±ce IPMI
+Summary(pl.UTF-8):   NarzÄ™dzia zarzÄ…dzajÄ…ce IPMI
 Name:		ipmiutil
 Version:	1.8.2
 Release:	1
@@ -25,19 +25,19 @@ order to talk to the BMC/firmware interface.
 An IPMI driver can be provided by either the Intel IPMI driver
 (/dev/imb) or the valinux IPMI driver (/dev/ipmikcs).
 
-%description -l pl
-Pakiet ipmiutil dostarcza narzêdzia do ogl±dania SEL (showsel),
-wykonywania sprzêtowego resetu (hwreset) i ustawiania wpisu Platform
-Event Filter, aby w³±czyæ alarmy BMC LAN pochodz±ce od komunikatów OS
+%description -l pl.UTF-8
+Pakiet ipmiutil dostarcza narzÄ™dzia do oglÄ…dania SEL (showsel),
+wykonywania sprzÄ™towego resetu (hwreset) i ustawiania wpisu Platform
+Event Filter, aby wÅ‚Ä…czyÄ‡ alarmy BMC LAN pochodzÄ…ce od komunikatÃ³w OS
 Critical Stop (pefconfig). Wymaga pakietu ze sterownikiem IPMI
-(ipmidrvr) do porozumiewania siê z interfejsem BMC/firmware.
+(ipmidrvr) do porozumiewania siÄ™ z interfejsem BMC/firmware.
 
-Sterownik IPMI mo¿e byæ dostarczony przez sterownik Intel IPMI
+Sterownik IPMI moÅ¼e byÄ‡ dostarczony przez sterownik Intel IPMI
 (/dev/imb), albo przez sterownik valinux IPMI (/dev/ipmikcs).
 
 %package mibs
 Summary:	MIB database
-Summary(pl):	Baza danych MIB
+Summary(pl.UTF-8):   Baza danych MIB
 Group:		Applications/System
 Requires:	net-snmp-mibs
 
@@ -46,10 +46,10 @@ This package contains MIB files from Intel:
 - Alert on LAN MIB
 - MIB file for PET events
 
-%description mibs -l pl
+%description mibs -l pl.UTF-8
 Ten pakiet zawiera pliki MIB od Intela:
 - alarmy dla LAN MIB
-- plik MIB dla zdarzeñ PET
+- plik MIB dla zdarzeÅ„ PET
 
 %prep
 %setup -q
