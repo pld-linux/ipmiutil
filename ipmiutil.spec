@@ -1,5 +1,5 @@
 Summary:	IPMI Management Utilities
-Summary(pl.UTF-8):   Narzędzia zarządzające IPMI
+Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
 Version:	1.8.2
 Release:	1
@@ -37,7 +37,7 @@ Sterownik IPMI może być dostarczony przez sterownik Intel IPMI
 
 %package mibs
 Summary:	MIB database
-Summary(pl.UTF-8):   Baza danych MIB
+Summary(pl.UTF-8):	Baza danych MIB
 Group:		Applications/System
 Requires:	net-snmp-mibs
 
