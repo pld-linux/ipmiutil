@@ -2,7 +2,7 @@ Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
 Version:	2.0.9
-Release:	0.2
+Release:	1
 License:	BSD
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
@@ -10,6 +10,7 @@ Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-make-jN.patch
 Patch2:		%{name}-static_lanplus.patch
+Patch3:		%{name}-am2.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -58,6 +59,7 @@ Ten pakiet zawiera pliki MIB od Intela:
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 rm -f lib/lib*.a*
 
@@ -90,6 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README TODO doc/UserGuide doc/checksel
 %attr(755,root,root) %{_sbindir}/alarms
 %attr(755,root,root) %{_sbindir}/bmchealth
+%attr(755,root,root) %{_sbindir}/events
 %attr(755,root,root) %{_sbindir}/fruconfig
 %attr(755,root,root) %{_sbindir}/getevent
 %attr(755,root,root) %{_sbindir}/hwreset
