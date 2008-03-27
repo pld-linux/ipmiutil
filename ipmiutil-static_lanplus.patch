@@ -1,0 +1,11 @@
+--- ipmiutil-2.0.9/util/Makefile.am.orig	2008-03-27 06:42:54.851914962 +0100
++++ ipmiutil-2.0.9/util/Makefile.am	2008-03-27 06:43:24.849853273 +0100
+@@ -40,7 +40,7 @@
+ # Could also use CMDMOD += ipmilan2.c  instead, if completed.
+ CMDMOD += ipmilanplus.c
+ AM_CPPFLAGS += @LANPLUS_CFLAGS@ 
+-LDADD += @LANPLUS_LDADD@ 
++LDADD += @LANPLUS_LIB@ @LANPLUS_CRYPTO@
+ 
+ METACFLAGS = -I. -I.. -DMETACOMMAND $(AM_CPPFLAGS)
+ METASOURCE = ipmiutil.c alarms.c bmchealth.c events.c fruconfig.c getevent.c hwreset.c icmd.c pefconfig.c sensor.c showsel.c tmconfig.c wdt.c isolconsole.c idiscover.c $(CMDMOD) 
