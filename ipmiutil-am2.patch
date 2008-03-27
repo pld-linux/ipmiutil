@@ -1,0 +1,23 @@
+--- ipmiutil-2.0.9/util/Makefile.am.orig	2008-03-27 15:41:45.629894204 +0100
++++ ipmiutil-2.0.9/util/Makefile.am	2008-03-27 15:43:30.122712649 +0100
+@@ -47,8 +47,8 @@
+ METALD = @LANDESK_LDADD@ @LANPLUS_LIB@ @LANPLUS_CRYPTO@ -lpthread
+ LDADD += -lpthread
+ 
+-sbin_PROGRAMS = ipmiutil alarms fruconfig hwreset sensor showsel pefconfig tmconfig wdt icmd getevent bmchealth xmlconfig isolconsole idiscover 
+-EXTRA_PROGRAMS = events ipmi_port
++sbin_PROGRAMS = ipmiutil alarms fruconfig hwreset sensor showsel pefconfig tmconfig wdt icmd getevent bmchealth xmlconfig isolconsole idiscover events 
++EXTRA_PROGRAMS = ipmi_port
+ noinst_LTLIBRARIES = libipmiutil.la libimbapi.la
+ 
+ # To build an imb api library (libimbapi.a):
+@@ -118,9 +118,5 @@
+ 
+ all-am: Makefile $(sbin_PROGRAMS) $(EXTRA_PROGRAMS)
+ 
+-install-data-am:  $(EXTRA_PROGRAMS)
+-	$(INSTALLBIN) events    $(DESTDIR)/$(datadir)/ipmiutil
+-	$(INSTALLBIN) ipmi_port $(DESTDIR)/$(datadir)/ipmiutil
+-
+ clean-generic:   
+ 	rm -f $(EXTRA_PROGRAMS)
