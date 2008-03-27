@@ -8,6 +8,7 @@ Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
 # Source0-md5:	2a29d97e9e2c2349d51e85cc390cbdce
 Patch0:		%{name}-am.patch
+Patch1:		%{name}-make-jN.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -54,6 +55,7 @@ Ten pakiet zawiera pliki MIB od Intela:
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 rm -f lib/lib*.a*
 
