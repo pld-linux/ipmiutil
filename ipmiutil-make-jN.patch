@@ -47,8 +47,8 @@
 -
 -ipmiutil_SOURCES  = 
 +ipmiutil_SOURCES = $(METASOURCE)
-+ipmiutil_CFLAGS = $(METACFLAGS) -c
-+ipmiutil_LADD = $(METALD)
++ipmiutil_CFLAGS = $(METACFLAGS)
++ipmiutil_LDADD = $(METALD)
 +
 +alarms_CFLAGS = $(AM_CFLAGS)
 +fruconfig_CFLAGS = $(AM_CFLAGS)
