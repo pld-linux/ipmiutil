@@ -14,6 +14,7 @@ Patch3:		%{name}-am2.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		mibsdir		/usr/share/snmp/mibs
@@ -64,6 +65,7 @@ Ten pakiet zawiera pliki MIB od Intela:
 rm -f lib/lib*.a*
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
