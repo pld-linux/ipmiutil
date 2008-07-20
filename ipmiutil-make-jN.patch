@@ -1,71 +1,42 @@
---- ipmiutil-2.0.9/util/Makefile.am.orig	2008-03-27 04:15:58.644878669 +0100
-+++ ipmiutil-2.0.9/util/Makefile.am	2008-03-27 04:24:41.608936541 +0100
-@@ -48,41 +48,39 @@
+--- ipmiutil-2.1.2/util/Makefile.am.orig	2008-06-24 23:11:30.000000000 +0200
++++ ipmiutil-2.1.2/util/Makefile.am	2008-07-20 15:04:45.542041412 +0200
+@@ -48,32 +48,21 @@
  LDADD += -lpthread
  
- sbin_PROGRAMS = ipmiutil alarms fruconfig hwreset sensor showsel pefconfig tmconfig wdt icmd getevent bmchealth xmlconfig isolconsole idiscover 
--EXTRA_PROGRAMS = events ipmi_port libipmiutil.a
+ sbin_PROGRAMS = ipmiutil idiscover 
+-EXTRA_PROGRAMS = events ipmi_port libipmiutil.a 
 +EXTRA_PROGRAMS = events ipmi_port
 +noinst_LTLIBRARIES = libipmiutil.la libimbapi.la
+ OLDPROGS = alarms bmchealth fruconfig getevent hwreset icmd isolconsole pefconfig sensor showsel tmconfig wdt
+ # xmlconfig dropped
  
  # To build an imb api library (libimbapi.a):
 -libimbapi.a:	imbapi.c
--	gcc -DHAVE_CONFIG_H -I. -I.. -DLINUX -fPIC -g -O2 -c imbapi.c
--	ar cru libimbapi.a imbapi.o
--	ranlib libimbapi.a
+-	$(CC) -DHAVE_CONFIG_H -I. -I.. -DLINUX -fPIC $(CFLAGS) -c imbapi.c
+-	$(AR) cru libimbapi.a imbapi.o
+-	$(RANLIB) libimbapi.a
 -	rm -f imbapi.o
 +libimbapi_la_SOURCES = imbapi.c
-+libimbapi_la_CFLAGS = -DHAVE_CONFIG_H -I. -I.. -DLINUX -fPIC -g -O2 -c
++libimbapi_la_CFLAGS = -DHAVE_CONFIG_H -I. -I.. -DLINUX -fPIC -c
   
  # To build a lib to support all of the IPMI drivers (libipmiutil.a)
 -libipmiutil.a:	$(CMDMOD:.c=.o) @LANPLUS_LIB@
--	ar cru libipmiutil.a $(CMDMOD:.c=.o) @LANPLUS_LIB@
--	ranlib libipmiutil.a
+-	$(AR) cru libipmiutil.a $(CMDMOD:.c=.o) @LANPLUS_LIB@
+-	$(RANLIB) libipmiutil.a
 +libipmiutil_la_SOURCES = $(CMDMOD)
 +libipmiutil_la_LIBADD = @LANPLUS_LIB@
 +libipmiutil_la_CFLAGS = $(AM_CFLAGS)
  
  # To build ipmiutil, need to use METACFLAGS for each .c/.o
--ipmiutil:	$(METASOURCE) 
--	@for f in $(METASOURCE); do \
--	    echo "gcc $(METACFLAGS) -c $$f"; \
--	    gcc $(METACFLAGS) -c $$f; done
--	@METAOBJ=`echo $(METASOURCE) | sed -e 's/ipmilan2.c//' | \
--			sed -e 's/.c$$/.o/g' -e 's/.c /.o /g'`; \
--	echo "gcc -g -O2 -o ipmiutil $$METAOBJ $(METALD)"; \
--	gcc -g -O2 -o ipmiutil $$METAOBJ $(METALD); \
--	rm -f $$METAOBJ 
 -
 -idiscover:	idiscover.c
--	gcc $(CFLAGS) -o idiscover idiscover.c
+-	$(CC) $(CFLAGS) $(LDFLAGS) -o idiscover idiscover.c
 -
 -events:         events.c
--	gcc $(CFLAGS) -DTEST -o events events.c
+-	$(CC) $(CFLAGS) $(LDFLAGS) -DTEST -o events events.c
 -
 -ipmi_port:      ipmi_port.c
--	gcc $(CFLAGS) -o ipmi_port ipmi_port.c 
--
--ipmiutil_SOURCES  = 
-+ipmiutil_SOURCES = $(METASOURCE)
-+ipmiutil_CFLAGS = $(METACFLAGS)
-+ipmiutil_LDADD = $(METALD)
-+
-+alarms_CFLAGS = $(AM_CFLAGS)
-+fruconfig_CFLAGS = $(AM_CFLAGS)
-+hwreset_CFLAGS = $(AM_CFLAGS)
-+sensor_CFLAGS = $(AM_CFLAGS)
-+showsel_CFLAGS = $(AM_CFLAGS)
-+pefconfig_CFLAGS = $(AM_CFLAGS)
-+tmconfig_CFLAGS = $(AM_CFLAGS)
-+wdt_CFLAGS = $(AM_CFLAGS)
-+icmd_CFLAGS = $(AM_CFLAGS)
-+getevent_CFLAGS = $(AM_CFLAGS)
-+bmchealth_CFLAGS = $(AM_CFLAGS)
-+xmlconfig_CFLAGS = $(AM_CFLAGS)
-+isolconsole_CFLAGS = $(AM_CFLAGS)
-+idiscover_CFLAGS = $(AM_CFLAGS)
-+events_CFLAGS = $(AM_CFLAGS) -DTEST
-+ipmi_port_CFLAGS = $(AM_CFLAGS)
+-	$(CC) $(CFLAGS) $(LDFLAGS) -o ipmi_port ipmi_port.c 
  
- events_SOURCES    = events.c
+ ipmiutil_SOURCES  = $(METASOURCE) 
  
