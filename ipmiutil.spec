@@ -1,16 +1,15 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.0.9
+Version:	2.1.2
 Release:	1
 License:	BSD
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	2a29d97e9e2c2349d51e85cc390cbdce
+# Source0-md5:	57d714c198504abdb59b4f3ccb4d3027
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-make-jN.patch
-Patch2:		%{name}-static_lanplus.patch
-Patch3:		%{name}-am2.patch
+Patch2:		%{name}-am2.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -60,9 +59,8 @@ Ten pakiet zawiera pliki MIB od Intela:
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
-rm -f lib/lib*.a*
+rm lib/lib*.a*
 
 %build
 %{__libtoolize}
@@ -83,8 +81,10 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_mandir}/man8,%{mibsdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install doc/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
-install doc/*.mib $RPM_BUILD_ROOT%{mibsdir}
+%{__make} -C doc install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+mv $RPM_BUILD_ROOT%{_datadir}/ipmiutil/*.mib $RPM_BUILD_ROOT%{mibsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -107,7 +107,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/showsel
 %attr(755,root,root) %{_sbindir}/tmconfig
 %attr(755,root,root) %{_sbindir}/wdt
-%attr(755,root,root) %{_sbindir}/xmlconfig
 %{_mandir}/man8/alarms.8*
 %{_mandir}/man8/bmchealth.8*
 %{_mandir}/man8/events.8*
