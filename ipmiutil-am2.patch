@@ -1,17 +1,17 @@
---- ipmiutil-2.1.2/util/Makefile.am.orig	2008-07-20 15:37:30.106034707 +0200
-+++ ipmiutil-2.1.2/util/Makefile.am	2008-07-20 15:44:38.450034707 +0200
-@@ -47,8 +47,8 @@
- METASOURCE = ipmiutil.c alarms.c bmchealth.c events.c fruconfig.c getevent.c hwreset.c icmd.c pefconfig.c sensor.c showsel.c tmconfig.c wdt.c isolconsole.c idiscover.c $(CMDMOD) 
+--- ipmiutil-2.2.0/util/Makefile.am.orig	2008-08-28 00:43:57.162120901 +0200
++++ ipmiutil-2.2.0/util/Makefile.am	2008-08-28 00:44:44.674119225 +0200
+@@ -51,8 +51,8 @@
+ METASOURCE = ipmiutil.c alarms.c bmchealth.c events.c fruconfig.c getevent.c hwreset.c icmd.c pefconfig.c sensor.c showsel.c tmconfig.c wdt.c isolconsole.c idiscover.c bmcconfig.c $(CMDMOD) 
  LDADD += -lpthread
- 
+ 	
 -sbin_PROGRAMS = ipmiutil idiscover 
 -EXTRA_PROGRAMS = events ipmi_port
 +sbin_PROGRAMS = ipmiutil idiscover events
 +EXTRA_PROGRAMS = ipmi_port
  noinst_LTLIBRARIES = libipmiutil.la libimbapi.la
+ TESTPROGS = bmcconfig xmlconfig
  OLDPROGS = alarms bmchealth fruconfig getevent hwreset icmd isolconsole pefconfig sensor showsel tmconfig wdt
- # xmlconfig dropped
-@@ -67,8 +67,10 @@
+@@ -71,8 +71,10 @@
  ipmiutil_SOURCES  = $(METASOURCE) 
  
  events_SOURCES    = events.c
@@ -22,7 +22,7 @@
  
  ipmi_port_SOURCES = ipmi_port.c 
  
-@@ -78,9 +80,5 @@
+@@ -82,9 +84,5 @@
  
  all-am: Makefile $(sbin_PROGRAMS) $(EXTRA_PROGRAMS)
  
@@ -31,4 +31,4 @@
 -	$(INSTALLBIN) ipmi_port $(DESTDIR)/$(datadir)/ipmiutil
 -
  clean-generic:   
- 	rm -f $(EXTRA_PROGRAMS) $(OLDPROGS)
+ 	rm -f $(EXTRA_PROGRAMS) $(OLDPROGS) $(TESTPROGS)
