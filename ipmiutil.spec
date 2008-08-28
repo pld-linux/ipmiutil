@@ -1,12 +1,12 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.1.2
+Version:	2.2.0
 Release:	1
 License:	BSD
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	57d714c198504abdb59b4f3ccb4d3027
+# Source0-md5:	382be2356375081e777b3b6e4d51afe0
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-make-jN.patch
 Patch2:		%{name}-am2.patch
@@ -93,6 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README TODO doc/UserGuide doc/checksel
 %attr(755,root,root) %{_sbindir}/alarms
+%attr(755,root,root) %{_sbindir}/bmcconfig
 %attr(755,root,root) %{_sbindir}/bmchealth
 %attr(755,root,root) %{_sbindir}/events
 %attr(755,root,root) %{_sbindir}/fruconfig
@@ -108,6 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/tmconfig
 %attr(755,root,root) %{_sbindir}/wdt
 %{_mandir}/man8/alarms.8*
+%{_mandir}/man8/bmcconfig.8*
 %{_mandir}/man8/bmchealth.8*
 %{_mandir}/man8/events.8*
 %{_mandir}/man8/fruconfig.8*
