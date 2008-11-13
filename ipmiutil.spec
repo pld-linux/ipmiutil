@@ -1,9 +1,14 @@
+%bcond_without	gpl
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
 Version:	2.2.0
-Release:	1
+Release:	2
+%if %{with gpl}
+License:	GPL
+%else
 License:	BSD
+%endif
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
 # Source0-md5:	382be2356375081e777b3b6e4d51afe0
@@ -68,7 +73,11 @@ rm lib/lib*.a*
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	%{?with_gpl:--enable-gpl} \
+	--enable-shared \
+	--enable-static
+
 %{__make} -C lib \
 	CC="%{__cc}"
 %{__make} \
