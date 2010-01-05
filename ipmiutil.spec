@@ -2,8 +2,8 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.2.0
-Release:	2
+Version:	2.2.4
+Release:	1
 %if %{with gpl}
 License:	GPL
 %else
@@ -11,7 +11,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	382be2356375081e777b3b6e4d51afe0
+# Source0-md5:	64be42e4d532cac0b27e478723e999f2
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-make-jN.patch
 Patch2:		%{name}-am2.patch
@@ -100,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/UserGuide doc/checksel
+%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/UserGuide doc/checksel doc/*.sh
 %attr(755,root,root) %{_sbindir}/alarms
 %attr(755,root,root) %{_sbindir}/bmcconfig
 %attr(755,root,root) %{_sbindir}/bmchealth

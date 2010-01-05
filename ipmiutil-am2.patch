@@ -22,13 +22,14 @@
  
  ipmi_port_SOURCES = ipmi_port.c 
  
-@@ -82,9 +84,5 @@
+@@ -82,10 +84,5 @@
  
  all-am: Makefile $(sbin_PROGRAMS) $(EXTRA_PROGRAMS)
  
 -install-data-am:  $(EXTRA_PROGRAMS)
 -	$(INSTALLBIN) events    $(DESTDIR)/$(datadir)/ipmiutil
 -	$(INSTALLBIN) ipmi_port $(DESTDIR)/$(datadir)/ipmiutil
+-	cd $(DESTDIR)/$(sbindir); strip $(sbin_PROGRAMS)
 -
  clean-generic:   
  	rm -f $(EXTRA_PROGRAMS) $(OLDPROGS) $(TESTPROGS)
