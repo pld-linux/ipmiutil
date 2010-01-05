@@ -3,22 +3,22 @@
 @@ -54,52 +54,23 @@
  LDADD += -lpthread
  	
- sbin_PROGRAMS = ipmiutil idiscover 
--EXTRA_PROGRAMS = events ipmi_port libipmiutil.a 
-+EXTRA_PROGRAMS = events ipmi_port
+ sbin_PROGRAMS = ipmiutil idiscover ipmi_port ievents
+-EXTRA_PROGRAMS = libipmiutil.a libimbapi.a ipmi_sample
++EXTRA_PROGRAMS = 
 +noinst_LTLIBRARIES = libipmiutil.la libimbapi.la
- TESTPROGS = bmcconfig xmlconfig ipmimv ipmi_sample
+ TESTPROGS = bmcconfig xmlconfig ipmimv 
  OLDPROGS = alarms bmchealth fruconfig getevent hwreset icmd isolconsole pefconfig sensor showsel tmconfig wdt
  # xmlconfig dropped
  
  # To build an imb api library (libimbapi.a):
 -libimbapi.a:	imbapi.c
--	$(CC) -I. -I.. @OSFLAG@ -fPIC $(CFLAGS) -c imbapi.c
+-	$(CC) -I. -I.. @OS_CFLAGS@ -fPIC $(CFLAGS) -c imbapi.c
 -	$(AR) cru libimbapi.a imbapi.o
 -	$(RANLIB) libimbapi.a
 -	rm -f imbapi.o
 +libimbapi_la_SOURCES = imbapi.c
-+libimbapi_la_CFLAGS = -I. -I.. -DLINUX -fPIC -c
++libimbapi_la_CFLAGS = -I. -I.. @OS_CFLAGS@ -fPIC -c
   
  # To build a lib to support all of the IPMI drivers (libipmiutil.a)
 -libipmiutil.a:	$(CMDMOD:.c=.o) @LANPLUS_LIB@
@@ -41,8 +41,8 @@
 -ipmimv: 	ipmimv.c
 -	$(CC) @OS_CFLAGS@ $(CFLAGS) $(LDFLAGS) -DTEST_BIN -o ipmimv ipmimv.c
 -
--events:         events.c
--	$(CC) $(CFLAGS) $(LDFLAGS) -DTEST -o events events.c
+-ievents:         ievents.c
+-	$(CC) $(CFLAGS) $(LDFLAGS) -DTEST -o ievents ievents.c
 -
 -ipmi_sample:	libipmiutil.a ipmi_sample.c
 -	$(CC) $(CFLAGS_SAM) -c ipmi_sample.c

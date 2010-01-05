@@ -2,7 +2,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.3.9
+Version:	2.4.3
 Release:	1
 %if %{with gpl}
 License:	GPL
@@ -11,7 +11,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://dl.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	2c0aa5bad1f84ad36f3f9d6294d00739
+# Source0-md5:	904b07a9937209c1f2231623ab20039e
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-make-jN.patch
 Patch2:		%{name}-am2.patch
@@ -100,16 +100,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/UserGuide doc/checksel doc/*.sh
+%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/{UserGuide,checksel,*.sh,ipmiutil_asy,ipmiutil_wdt}
 %attr(755,root,root) %{_sbindir}/alarms
 %attr(755,root,root) %{_sbindir}/bmcconfig
 %attr(755,root,root) %{_sbindir}/bmchealth
-%attr(755,root,root) %{_sbindir}/events
 %attr(755,root,root) %{_sbindir}/fruconfig
 %attr(755,root,root) %{_sbindir}/getevent
 %attr(755,root,root) %{_sbindir}/hwreset
 %attr(755,root,root) %{_sbindir}/icmd
 %attr(755,root,root) %{_sbindir}/idiscover
+%attr(755,root,root) %{_sbindir}/ievents
+%attr(755,root,root) %{_sbindir}/ipmi_port
 %attr(755,root,root) %{_sbindir}/ipmiutil
 %attr(755,root,root) %{_sbindir}/isolconsole
 %attr(755,root,root) %{_sbindir}/pefconfig
@@ -120,12 +121,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/alarms.8*
 %{_mandir}/man8/bmcconfig.8*
 %{_mandir}/man8/bmchealth.8*
-%{_mandir}/man8/events.8*
 %{_mandir}/man8/fruconfig.8*
 %{_mandir}/man8/getevent.8*
 %{_mandir}/man8/hwreset.8*
 %{_mandir}/man8/icmd.8*
 %{_mandir}/man8/idiscover.8*
+%{_mandir}/man8/ievents.8*
 %{_mandir}/man8/ipmiutil.8*
 %{_mandir}/man8/isolconsole.8*
 %{_mandir}/man8/pefconfig.8*

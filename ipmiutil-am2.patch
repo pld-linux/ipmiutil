@@ -1,35 +1,22 @@
 --- ipmiutil-2.2.0/util/Makefile.am.orig	2008-08-28 00:43:57.162120901 +0200
 +++ ipmiutil-2.2.0/util/Makefile.am	2008-08-28 00:44:44.674119225 +0200
-@@ -51,8 +51,8 @@
- METASOURCE = ipmiutil.c alarms.c bmchealth.c events.c fruconfig.c getevent.c hwreset.c icmd.c pefconfig.c sensor.c showsel.c tmconfig.c wdt.c isolconsole.c idiscover.c bmcconfig.c $(CMDMOD) 
- LDADD += -lpthread
- 	
--sbin_PROGRAMS = ipmiutil idiscover 
--EXTRA_PROGRAMS = events ipmi_port
-+sbin_PROGRAMS = ipmiutil idiscover events
-+EXTRA_PROGRAMS = ipmi_port
- noinst_LTLIBRARIES = libipmiutil.la libimbapi.la
- TESTPROGS = bmcconfig xmlconfig
- OLDPROGS = alarms bmchealth fruconfig getevent hwreset icmd isolconsole pefconfig sensor showsel tmconfig wdt
 @@ -71,8 +71,10 @@
- ipmiutil_SOURCES  = $(METASOURCE) 
+ #	$(CC) $(CFLAGS) $(LDFLAGS) -o ipmiutil $(METASOURCE:.c=.o)
  
- events_SOURCES    = events.c
-+events_CPPFLAGS = $(AM_CPPFLAGS) -UMETACOMMAND -DTEST
+ ievents_SOURCES    = ievents.c
++ievents_CPPFLAGS = $(AM_CPPFLAGS) -UMETACOMMAND -DTEST
  
  idiscover_SOURCES = idiscover.c 
 +idiscover_CPPFLAGS = $(AM_CPPFLAGS) -UMETACOMMAND
  
  ipmi_port_SOURCES = ipmi_port.c 
  
-@@ -82,11 +84,5 @@
+@@ -82,9 +84,5 @@
  
  all-am: Makefile $(sbin_PROGRAMS) $(EXTRA_PROGRAMS)
  
 -install-data-am:  $(EXTRA_PROGRAMS)
 -	mkdir -p $(DESTDIR)$(extradir)
--	$(INSTALLBIN) events    $(DESTDIR)$(extradir)
--	$(INSTALLBIN) ipmi_port $(DESTDIR)$(extradir)
 -	cd $(DESTDIR)/$(sbindir); strip $(sbin_PROGRAMS)
 -
  clean-generic:   
