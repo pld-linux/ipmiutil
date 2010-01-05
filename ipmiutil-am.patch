@@ -4,6 +4,6 @@
  
 -SUBDIRS = doc freeipmi lib util
 +SUBDIRS = util
- PKGDIR = /usr/src/redhat
+ PKGDIR = @PKG_DIR@
  SOURCEDIR = $(PKGDIR)/SOURCES
  BUILDDIR = $(PKGDIR)/BUILD

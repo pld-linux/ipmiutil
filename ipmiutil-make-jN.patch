@@ -1,33 +1,34 @@
 --- ipmiutil-2.2.0/util/Makefile.am.orig	2008-08-25 22:08:37.000000000 +0200
 +++ ipmiutil-2.2.0/util/Makefile.am	2008-08-28 00:43:08.614118386 +0200
-@@ -52,47 +52,23 @@
+@@ -54,52 +54,23 @@
  LDADD += -lpthread
  	
  sbin_PROGRAMS = ipmiutil idiscover 
 -EXTRA_PROGRAMS = events ipmi_port libipmiutil.a 
 +EXTRA_PROGRAMS = events ipmi_port
 +noinst_LTLIBRARIES = libipmiutil.la libimbapi.la
- TESTPROGS = bmcconfig xmlconfig ipmimv
+ TESTPROGS = bmcconfig xmlconfig ipmimv ipmi_sample
  OLDPROGS = alarms bmchealth fruconfig getevent hwreset icmd isolconsole pefconfig sensor showsel tmconfig wdt
  # xmlconfig dropped
  
  # To build an imb api library (libimbapi.a):
 -libimbapi.a:	imbapi.c
--	$(CC) -I. -I.. -DLINUX -fPIC $(CFLAGS) -c imbapi.c
+-	$(CC) -I. -I.. @OSFLAG@ -fPIC $(CFLAGS) -c imbapi.c
 -	$(AR) cru libimbapi.a imbapi.o
 -	$(RANLIB) libimbapi.a
 -	rm -f imbapi.o
 +libimbapi_la_SOURCES = imbapi.c
-+libimbapi_la_CFLAGS = -DHAVE_CONFIG_H -I. -I.. -DLINUX -fPIC -c
++libimbapi_la_CFLAGS = -I. -I.. -DLINUX -fPIC -c
   
  # To build a lib to support all of the IPMI drivers (libipmiutil.a)
 -libipmiutil.a:	$(CMDMOD:.c=.o) @LANPLUS_LIB@
 -	if [ -f "@LANPLUS_LIB@" ]; then \
+-	    $(CC) $(CFLAGS_SAM) -c ipmilanplus.c; \
 -	    ar x @LANPLUS_LIB@ ; fi
 -	$(AR) cru libipmiutil.a $(CMDMOD:.c=.o) $(LANPLUS_OBJ)
 -	$(RANLIB) libipmiutil.a
 -	if [ -f "@LANPLUS_LIB@" ]; then \
--	    rm -f $(LANPLUS_OBJ) ; fi 
+-	    rm -f $(LANPLUS_OBJ) ipmilanplus.o; fi 
 +libipmiutil_la_SOURCES = $(CMDMOD)
 +libipmiutil_la_LIBADD = @LANPLUS_LIB@
 +libipmiutil_la_CFLAGS = $(AM_CFLAGS)
@@ -35,13 +36,17 @@
  # To build ipmiutil, need to use METACFLAGS for each .c/.o
  
 -idiscover:	idiscover.c
--	$(CC) $(CFLAGS) $(LDFLAGS) -o idiscover idiscover.c
+-	$(CC) @OS_CFLAGS@ $(CFLAGS) $(LDFLAGS) -o idiscover idiscover.c
 -
 -ipmimv: 	ipmimv.c
--	$(CC) $(CFLAGS) $(LDFLAGS) -DTEST_BIN -o ipmimv ipmimv.c
+-	$(CC) @OS_CFLAGS@ $(CFLAGS) $(LDFLAGS) -DTEST_BIN -o ipmimv ipmimv.c
 -
 -events:         events.c
 -	$(CC) $(CFLAGS) $(LDFLAGS) -DTEST -o events events.c
+-
+-ipmi_sample:	libipmiutil.a ipmi_sample.c
+-	$(CC) $(CFLAGS_SAM) -c ipmi_sample.c
+-	$(CC)  -g -O2 -o ipmi_sample  ipmi_sample.o libipmiutil.a $(LDFLAGS) $(LDADD)
 -
 -ipmi_port:      ipmi_port.c
 -	$(CC) $(CFLAGS) $(LDFLAGS) -o ipmi_port ipmi_port.c 
@@ -53,5 +58,5 @@
 -	$(CC) $(CFLAGS) $(LDFLAGS) -o bmcconfig bmcconfig.c libipmiutil.a @LANPLUS_CRYPTO@
 -
  ipmiutil_SOURCES  = $(METASOURCE) 
- 
- events_SOURCES    = events.c
+ # ipmiutil:	$(METASOURCE:.c=.o) 
+ #	$(CC) $(CFLAGS) $(LDFLAGS) -o ipmiutil $(METASOURCE:.c=.o)
