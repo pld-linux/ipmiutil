@@ -1,9 +1,20 @@
+# TODO
+# - unpackaged:
+#   /etc/cron.daily/checksel
+#   /etc/rc.d/init.d/ipmi_port
+#   /etc/rc.d/init.d/ipmiutil_asy
+#   /etc/rc.d/init.d/ipmiutil_wdt
+#   /usr/share/ipmiutil/COPYING
+#   /usr/share/ipmiutil/README
+#   /usr/share/ipmiutil/UserGuide
+#   /usr/share/ipmiutil/evt.sh
+#   /usr/share/ipmiutil/ipmi_if.sh
 %bcond_without	gpl
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
 Version:	2.5.2
-Release:	1
+Release:	3
 %if %{with gpl}
 License:	GPL
 %else
@@ -20,9 +31,10 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
+Requires:	mibs-%{name}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		mibsdir		/usr/share/snmp/mibs
+%define		mibsdir		/usr/share/mibs
 
 %description
 The ipmiutil component package provides utilities to view the SEL
@@ -44,18 +56,20 @@ Critical Stop (pefconfig). Wymaga pakietu ze sterownikiem IPMI
 Sterownik IPMI może być dostarczony przez sterownik Intel IPMI
 (/dev/imb), albo przez sterownik valinux IPMI (/dev/ipmikcs).
 
-%package mibs
-Summary:	MIB database
+%package -n mibs-%{name}
+Summary:	MIB database from IPMI Management Utilities
 Summary(pl.UTF-8):	Baza danych MIB
 Group:		Applications/System
+Requires:	mibs-dirs
 Requires:	net-snmp-mibs
+Obsoletes:	ipmiutil-mibs
 
-%description mibs
+%description -n mibs-%{name}
 This package contains MIB files from Intel:
 - Alert on LAN MIB
 - MIB file for PET events
 
-%description mibs -l pl.UTF-8
+%description -n mibs-%{name} -l pl.UTF-8
 Ten pakiet zawiera pliki MIB od Intela:
 - alarmy dla LAN MIB
 - plik MIB dla zdarzeń PET
@@ -136,7 +150,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/tmconfig.8*
 %{_mandir}/man8/wdt.8*
 
-%files mibs
+%files -n mibs-%{name}
 %defattr(644,root,root,755)
 %{mibsdir}/bmclanaol.mib
 %{mibsdir}/bmclanpet.mib
