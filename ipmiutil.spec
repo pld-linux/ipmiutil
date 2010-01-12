@@ -14,7 +14,7 @@ Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
 Version:	2.5.2
-Release:	3
+Release:	4
 %if %{with gpl}
 License:	GPL
 %else
@@ -61,7 +61,7 @@ Summary:	MIB database from IPMI Management Utilities
 Summary(pl.UTF-8):	Baza danych MIB
 Group:		Applications/System
 Requires:	mibs-dirs
-Requires:	net-snmp-mibs
+Requires:	mibs-net-snmp
 Obsoletes:	ipmiutil-mibs
 
 %description -n mibs-%{name}
