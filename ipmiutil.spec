@@ -49,20 +49,18 @@ Sterownik IPMI może być dostarczony przez sterownik Intel IPMI
 
 %package -n mibs-%{name}
 Summary:	MIB database from IPMI Management Utilities
-Summary(pl.UTF-8):	Baza danych MIB
+Summary(pl.UTF-8):	Baza danych MIB z narzędzi zarządzających IPMI
 Group:		Applications/System
 Requires:	mibs-dirs
 Requires:	mibs-net-snmp
 Obsoletes:	ipmiutil-mibs
 
 %description -n mibs-%{name}
-This package contains MIB files from Intel:
-- Alert on LAN MIB
+This package contains MIB file from Intel:
 - MIB file for PET events
 
 %description -n mibs-%{name} -l pl.UTF-8
-Ten pakiet zawiera pliki MIB od Intela:
-- alarmy dla LAN MIB
+Ten pakiet zawiera plik MIB od Intela:
 - plik MIB dla zdarzeń PET
 
 %prep
