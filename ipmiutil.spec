@@ -5,7 +5,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.7.2
+Version:	2.7.3
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -14,7 +14,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	07fd1ab25472c1f3371da2e0d07dfda2
+# Source0-md5:	61cb6a7e8e57a67264a0537bd7006322
 Patch0:		%{name}-am.patch
 Patch1:		%{name}-make-jN.patch
 URL:		http://ipmiutil.sourceforge.net/
