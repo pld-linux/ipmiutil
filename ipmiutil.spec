@@ -15,8 +15,7 @@ License:	BSD
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
 # Source0-md5:	f4a3041b432d0118f04d859d5bae5e51
-#Patch0:		%{name}-am.patch
-Patch1:		%{name}-make-jN.patch
+Patch0:		%{name}-make-jN.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -65,8 +64,7 @@ Ten pakiet zawiera plik MIB od Intela:
 
 %prep
 %setup -q
-#%patch0 -p1
-%patch1 -p1
+%patch0 -p1
 
 %{__rm} lib/lib*.a*
 
