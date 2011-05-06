@@ -1,9 +1,0 @@
---- ipmiutil-1.7.10/Makefile.am.orig	2006-12-08 21:44:11.000000000 +0100
-+++ ipmiutil-1.7.10/Makefile.am	2006-12-13 00:43:30.167525769 +0100
-@@ -1,5 +1,5 @@
- 
--SUBDIRS = doc freeipmi lib util
-+SUBDIRS = util
- PKGDIR = @PKG_DIR@
- SOURCEDIR = $(PKGDIR)/SOURCES
- BUILDDIR = $(PKGDIR)/BUILD
