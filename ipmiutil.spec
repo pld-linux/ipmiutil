@@ -91,9 +91,6 @@ install -d $RPM_BUILD_ROOT%{mibsdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__make} -C doc install \
-	DESTDIR=$RPM_BUILD_ROOT
-
 mv $RPM_BUILD_ROOT%{_datadir}/ipmiutil/*.mib $RPM_BUILD_ROOT%{mibsdir}
 
 %clean
