@@ -5,7 +5,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.7.7
+Version:	2.7.8
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -14,7 +14,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	c782471c9289ccb5251a1c3fb0ae59c6
+# Source0-md5:	6b82762ed76c5bd0c57765cc50651656
 Patch0:		%{name}-make-jN.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
@@ -129,6 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/ialarms.8*
 %{_mandir}/man8/icmd.8*
 %{_mandir}/man8/iconfig.8*
+%{_mandir}/man8/idelloem.8*
 %{_mandir}/man8/idiscover.8*
 %{_mandir}/man8/iekanalyzer.8*
 %{_mandir}/man8/ievents.8*
