@@ -1,6 +1,6 @@
---- ipmiutil-2.7.8/util/Makefile.am.orig	2011-09-13 23:34:36.000000000 +0200
-+++ ipmiutil-2.7.8/util/Makefile.am	2011-09-17 15:06:56.278234517 +0200
-@@ -64,75 +64,47 @@
+--- ipmiutil-2.7.9/util/Makefile.am.orig	2011-10-04 16:10:06.000000000 +0200
++++ ipmiutil-2.7.9/util/Makefile.am	2011-10-30 15:44:46.304197190 +0100
+@@ -65,57 +65,19 @@
  # EXTRA_PROGRAMS are built by default but not included in the install package
  # TESTPROGS are not built by default.  To build, do 'make ifruset', for example.
  sbin_PROGRAMS = ipmiutil idiscover ipmi_port ievents
@@ -12,7 +12,7 @@
  
  # To build an imb api library (libimbapi.a):
 -libimbapi.a:	imbapi.c
--	$(CC) -I. -I.. @OS_CFLAGS@ -fPIC $(CFLAGS) -o $(tmpdir)/imbapi.o -c imbapi.c
+-	$(CC) -I. -I.. $(OS_CF)-fPIC $(CFLAGS) -o $(tmpdir)/imbapi.o -c imbapi.c
 -	$(AR) cru libimbapi.a $(tmpdir)/imbapi.o
 -	$(RANLIB) libimbapi.a
 -	rm -f $(tmpdir)/imbapi.o
@@ -33,10 +33,10 @@
 -# To build ipmiutil, need to use METACFLAGS for each .c/.o
 -
 -idiscover:	idiscover.c
--	$(CC) @OS_CFLAGS@ $(CFLAGS) $(LDFLAGS) $(OS_LF) -o idiscover idiscover.c
+-	$(CC) $(OS_CF) $(CFLAGS) $(LDFLAGS) $(OS_LF) -o idiscover idiscover.c
 -
 -ipmimv: 	ipmimv.c
--	$(CC) @OS_CFLAGS@ $(CFLAGS) $(LDFLAGS) -DTEST_BIN -o ipmimv ipmimv.c
+-	$(CC) $(OS_CF) $(CFLAGS) $(LDFLAGS) -DTEST_BIN -o ipmimv ipmimv.c
 -
 -ievents:         ievents.c
 -	$(CC) $(CFLAGS) $(LDFLAGS) -DALONE -o ievents ievents.c 
@@ -63,8 +63,9 @@
 +libipmiutil_la_CFLAGS = $(AM_CFLAGS)
  
  ipmiutil_SOURCES  = $(METASOURCE) 
--# ipmiutil:	$(METASOURCE:.c=.o) 
--#	$(CC) $(CFLAGS) $(LDFLAGS) -o ipmiutil $(METASOURCE:.c=.o)
+ 
+@@ -124,18 +86,30 @@
+ #	$(CC) $(CFLAGS) $(LDFLAGS) -o ipmiutil $(METASOURCE:.c=.o) $(LDADD)
  
  ievents_SOURCES    = ievents.c
 +ievents_CPPFLAGS = $(AM_CPPFLAGS) -UMETACOMMAND -DALONE
