@@ -5,7 +5,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.7.9
+Version:	2.8.1
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -14,8 +14,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	3e6bc1effe4aaeeb614de19538c343ec
-Patch0:		%{name}-make-jN.patch
+# Source0-md5:	1db68d1d2ed9d04d719c1f45cb801aee
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -64,7 +63,6 @@ Ten pakiet zawiera plik MIB od Intela:
 
 %prep
 %setup -q
-%patch0 -p1
 
 %{__rm} lib/lib*.a*
 
@@ -92,6 +90,8 @@ install -d $RPM_BUILD_ROOT%{mibsdir}
 	DESTDIR=$RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT%{_datadir}/ipmiutil/*.mib $RPM_BUILD_ROOT%{mibsdir}
+# devel not packaged
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libipmiutil.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -120,7 +120,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/iserial
 %attr(755,root,root) %{_sbindir}/isol
 %attr(755,root,root) %{_sbindir}/iwdt
-%attr(754,root,root) /etc/cron.daily/checksel
 %attr(754,root,root) /etc/rc.d/init.d/ipmi_port
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_asy
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_evt
@@ -129,6 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/ialarms.8*
 %{_mandir}/man8/icmd.8*
 %{_mandir}/man8/iconfig.8*
+%{_mandir}/man8/idcmi.8*
 %{_mandir}/man8/idelloem.8*
 %{_mandir}/man8/idiscover.8*
 %{_mandir}/man8/iekanalyzer.8*
@@ -149,6 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/iserial.8*
 %{_mandir}/man8/isol.8*
 %{_mandir}/man8/isunoem.8*
+%{_mandir}/man8/itsol.8*
 %{_mandir}/man8/iwdt.8*
 
 %files -n mibs-%{name}
