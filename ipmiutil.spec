@@ -1,3 +1,4 @@
+# TODO: systemd support
 #
 # Conditonal build:
 %bcond_without	gpl	# build with GPL code (md2.h, ipmi_ioctls.h)
@@ -5,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.8.1
+Version:	2.8.2
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -14,7 +15,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	1db68d1d2ed9d04d719c1f45cb801aee
+# Source0-md5:	fc8e5070b1fddca06c9e66d00da71934
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -87,7 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{mibsdir}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	sysvinit=$RPM_BUILD_ROOT/etc/rc.d/init.d \
+	sysdto=$RPM_BUILD_ROOT%{systemdunitdir}
 
 mv $RPM_BUILD_ROOT%{_datadir}/ipmiutil/*.mib $RPM_BUILD_ROOT%{mibsdir}
 # devel not packaged
@@ -98,12 +101,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/{UserGuide,checksel,*.sh,ipmiutil_asy,ipmiutil_wdt}
+%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/UserGuide scripts/{checksel,*.sh}
+%attr(755,root,root) %{_bindir}/idiscover
+%attr(755,root,root) %{_bindir}/ievents
+%attr(755,root,root) %{_bindir}/ipmiutil
 %attr(755,root,root) %{_sbindir}/ialarms
 %attr(755,root,root) %{_sbindir}/icmd
 %attr(755,root,root) %{_sbindir}/iconfig
-%attr(755,root,root) %{_sbindir}/idiscover
-%attr(755,root,root) %{_sbindir}/ievents
 %attr(755,root,root) %{_sbindir}/ifirewall
 %attr(755,root,root) %{_sbindir}/ifru
 %attr(755,root,root) %{_sbindir}/ifwum
@@ -113,7 +117,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/ilan
 %attr(755,root,root) %{_sbindir}/ipicmg
 %attr(755,root,root) %{_sbindir}/ipmi_port
-%attr(755,root,root) %{_sbindir}/ipmiutil
 %attr(755,root,root) %{_sbindir}/ireset
 %attr(755,root,root) %{_sbindir}/isel
 %attr(755,root,root) %{_sbindir}/isensor
@@ -124,6 +127,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_asy
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_evt
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_wdt
+#%{systemdunitdir}/ipmi_port.service
+#%{systemdunitdir}/ipmiutil_asy.service
+#%{systemdunitdir}/ipmiutil_evt.service
+#%{systemdunitdir}/ipmiutil_wdt.service
 %{_datadir}/%{name}
 %{_mandir}/man8/ialarms.8*
 %{_mandir}/man8/icmd.8*
