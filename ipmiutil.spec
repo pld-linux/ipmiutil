@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.8.3
+Version:	2.8.4
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -15,7 +15,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	b555c84b965fbcd493e66afa1578e2c1
+# Source0-md5:	9adb765ca78c6ed78684b174098567f5
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -94,7 +94,8 @@ install -d $RPM_BUILD_ROOT%{mibsdir}
 
 mv $RPM_BUILD_ROOT%{_datadir}/ipmiutil/*.mib $RPM_BUILD_ROOT%{mibsdir}
 # devel not packaged
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libipmiutil.a
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libipmiutil.a \
+	$RPM_BUILD_ROOT%{_includedir}/ipmicmd.h
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -127,10 +128,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_asy
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_evt
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_wdt
-#%{systemdunitdir}/ipmi_port.service
-#%{systemdunitdir}/ipmiutil_asy.service
-#%{systemdunitdir}/ipmiutil_evt.service
-#%{systemdunitdir}/ipmiutil_wdt.service
+%{systemdunitdir}/ipmi_port.service
+%{systemdunitdir}/ipmiutil_asy.service
+%{systemdunitdir}/ipmiutil_evt.service
+%{systemdunitdir}/ipmiutil_wdt.service
 %{_datadir}/%{name}
 %{_mandir}/man8/ialarms.8*
 %{_mandir}/man8/icmd.8*
