@@ -1,4 +1,4 @@
-# TODO: systemd support
+# TODO: finish systemd support
 #
 # Conditonal build:
 %bcond_without	gpl	# build with GPL code (md2.h, ipmi_ioctls.h)
@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.8.4
+Version:	2.8.5
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -15,7 +15,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	9adb765ca78c6ed78684b174098567f5
+# Source0-md5:	56e69955a5fbfe228bd092bd8309cc97
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
