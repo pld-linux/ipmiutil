@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.8.6
+Version:	2.8.7
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -15,7 +15,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	4ea2e4581fce6f82d614c452e0afe845
+# Source0-md5:	a1686f1d09c4964c0fd7e8a40bb88cd3
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -124,6 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/iserial
 %attr(755,root,root) %{_sbindir}/isol
 %attr(755,root,root) %{_sbindir}/iwdt
+%attr(754,root,root) /etc/rc.d/init.d/ipmi_info
 %attr(754,root,root) /etc/rc.d/init.d/ipmi_port
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_asy
 %attr(754,root,root) /etc/rc.d/init.d/ipmiutil_evt
