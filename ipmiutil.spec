@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.8.7
+Version:	2.8.8
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -15,7 +15,8 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	a1686f1d09c4964c0fd7e8a40bb88cd3
+# Source0-md5:	a7178c63856ee62aa0b1b81860d5355b
+Patch0:		%{name}-am.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -64,6 +65,7 @@ Ten pakiet zawiera plik MIB od Intela:
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__rm} lib/lib*.a*
 
