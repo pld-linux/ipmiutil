@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.8.8
+Version:	2.9.7
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -15,8 +15,11 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	a7178c63856ee62aa0b1b81860d5355b
+# Source0-md5:	b5b60a2f913a21dd04b86ce2a3900928
 Patch0:		%{name}-am.patch
+Patch1:		%{name}-idiscover-ifaces_with_dot_in_name_support.patch
+Patch2:		%{name}-libcrypto.patch
+Patch3:		%{name}-symlink.patch
 URL:		http://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -47,6 +50,44 @@ Critical Stop (pefconfig). Wymaga pakietu ze sterownikiem IPMI
 Sterownik IPMI może być dostarczony przez sterownik Intel IPMI
 (/dev/imb), albo przez sterownik valinux IPMI (/dev/ipmikcs).
 
+%package libs
+Summary:	ipmiutil library
+Summary(pl.UTF-8):	Biblioteka ipmiutil
+Group:		Libraries
+
+%description libs
+This package contains libipmiutil library.
+
+%description libs -l pl.UTF-8
+Ten pakiet zawiera bibliotekę libipmiutil.
+
+%package devel
+Summary:	Header files and examples for ipmiutil library
+Summary(pl.UTF-8):	Pliki nagłówkowe i dokumentacja do biblioteki ipmiutil
+Group:		Development/Libraries
+Requires:	%{name}-libs = %{version}-%{release}
+
+%description devel
+This package contains header files and examples for developing
+own programs which use libipmiutil.
+
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagłówkowe i przykłady umożliwiające
+tworzenie własnych programów wykorzystujących bibliotekę
+ipmiutil.
+
+%package static
+Summary:	Static ipmiutil library
+Summary(pl.UTF-8):	Statyczna biblioteka ipmiutil
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+This package contains static libipmiutil library.
+
+%description static -l pl.UTF-8
+Ten pakiet zawiera statyczną bibliotekę libipmiutil.
+
 %package -n mibs-%{name}
 Summary:	MIB database from IPMI Management Utilities
 Summary(pl.UTF-8):	Baza danych MIB z narzędzi zarządzających IPMI
@@ -66,6 +107,9 @@ Ten pakiet zawiera plik MIB od Intela:
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %{__rm} lib/lib*.a*
 
@@ -80,8 +124,6 @@ Ten pakiet zawiera plik MIB od Intela:
 	--enable-shared \
 	--enable-static
 
-%{__make} -C lib \
-	CC="%{__cc}"
 %{__make} \
 	CC="%{__cc}"
 
@@ -95,9 +137,12 @@ install -d $RPM_BUILD_ROOT%{mibsdir}
 	sysdto=$RPM_BUILD_ROOT%{systemdunitdir}
 
 mv $RPM_BUILD_ROOT%{_datadir}/ipmiutil/*.mib $RPM_BUILD_ROOT%{mibsdir}
-# devel not packaged
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libipmiutil.a \
-	$RPM_BUILD_ROOT%{_includedir}/ipmicmd.h
+
+install -d $RPM_BUILD_ROOT%{_includedir}
+install util/ipmicmd.h $RPM_BUILD_ROOT%{_includedir}
+
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install util/{ipmi_sample.c,ipmi_sample_evt.c,isensor.c,ievents.c,isensor.h,ievents.h,Makefile} $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -122,6 +167,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/ipmi_port
 %attr(755,root,root) %{_sbindir}/ireset
 %attr(755,root,root) %{_sbindir}/isel
+%attr(755,root,root) %{_sbindir}/iseltime
 %attr(755,root,root) %{_sbindir}/isensor
 %attr(755,root,root) %{_sbindir}/iserial
 %attr(755,root,root) %{_sbindir}/isol
@@ -158,10 +204,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/isel.8*
 %{_mandir}/man8/isensor.8*
 %{_mandir}/man8/iserial.8*
+%{_mandir}/man8/ismcoem.8*
 %{_mandir}/man8/isol.8*
 %{_mandir}/man8/isunoem.8*
 %{_mandir}/man8/itsol.8*
 %{_mandir}/man8/iwdt.8*
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libipmiutil.so.*
+
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libipmiutil.so
+%{_includedir}/ipmicmd.h
+%{_examplesdir}/%{name}-%{version}
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libipmiutil.a
 
 %files -n mibs-%{name}
 %defattr(644,root,root,755)

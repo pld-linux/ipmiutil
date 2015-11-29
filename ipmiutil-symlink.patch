@@ -1,0 +1,12 @@
+diff -ruN ipmiutil-2.9.7.orig/util/Makefile.am ipmiutil-2.9.7/util/Makefile.am
+--- ipmiutil-2.9.7.orig/util/Makefile.am	2015-10-12 19:13:02.000000000 +0200
++++ ipmiutil-2.9.7/util/Makefile.am	2015-11-29 03:00:34.459592097 +0100
+@@ -199,7 +199,7 @@
+ 	@INS_LIB@ cp -f $(DEV_LIB)      $(DESTDIR)$(LIBDIR)
+ 	@INS_LIB@ if [ "x$(SHRLINK)" != "x" ]; then \
+ 	   @INS_LIB@ cp -f $(SHRLINK)     $(DESTDIR)$(LIBDIR) ; \
+-	   @INS_LIB@ cd $(DESTDIR); ln -sf $(LIBDIR)/$(SHRLINK) $(DESTDIR)$(LIBDIR)/$(SHR_BLIB);  \
++	   @INS_LIB@ cd $(DESTDIR); ln -sf $(SHRLINK) $(DESTDIR)$(LIBDIR)/$(SHR_BLIB);  \
+ 	@INS_LIB@ fi
+ 
+ clean-generic:   

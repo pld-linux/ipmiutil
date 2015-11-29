@@ -1,0 +1,17 @@
+diff -ruN ipmiutil-2.9.7.orig/util/Makefile.am ipmiutil-2.9.7/util/Makefile.am
+--- ipmiutil-2.9.7.orig/util/Makefile.am	2015-10-12 19:13:02.000000000 +0200
++++ ipmiutil-2.9.7/util/Makefile.am	2015-11-29 02:20:09.927811879 +0100
+@@ -101,11 +101,11 @@
+ 	   $(CC) $(CFLAGS_SAMX) -o $(tmpobj)/ipmilanplus.o -c ipmilanplus.c; \
+ 	   $(CC) $(CFLAGS_SAMX) -o $(tmpobj)/ipmilan.o -c ipmilan.c; \
+ 	   ar x @LANPLUS_LIB@ ; \
+-	   $(CC) $(LDFLAGS) -shared $(LDNAME) -o $(SHR_LIB) $(LIBOBJ) $(LANPLUS_OBJ); \
++	   $(CC) $(LDFLAGS) -shared $(LDNAME) -o $(SHR_LIB) $(LIBOBJ) $(LANPLUS_OBJ) -lcrypto; \
+ 	else \
+ 	   $(CC) $(CFLAGS_SAM) -o $(tmpobj)/ipmilanplus.o -c ipmilanplus.c; \
+ 	   $(CC) $(CFLAGS_SAM) -o $(tmpobj)/ipmilan.o -c ipmilan.c; \
+-	   $(CC) $(LDFLAGS) -shared $(LDNAME) -o $(SHR_LIB) $(LIBOBJ) ; \
++	   $(CC) $(LDFLAGS) -shared $(LDNAME) -o $(SHR_LIB) $(LIBOBJ) -lcrypto; \
+ 	fi 
+ 
+ $(SHR_BLIB):	$(SHR_LIB)
