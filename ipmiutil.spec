@@ -136,7 +136,7 @@ install -d $RPM_BUILD_ROOT%{mibsdir}
 	sysvinit=$RPM_BUILD_ROOT/etc/rc.d/init.d \
 	sysdto=$RPM_BUILD_ROOT%{systemdunitdir}
 
-mv $RPM_BUILD_ROOT%{_datadir}/ipmiutil/*.mib $RPM_BUILD_ROOT%{mibsdir}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/ipmiutil/*.mib $RPM_BUILD_ROOT%{mibsdir}
 
 install -d $RPM_BUILD_ROOT%{_includedir}
 install util/ipmicmd.h $RPM_BUILD_ROOT%{_includedir}
@@ -146,6 +146,9 @@ install util/{ipmi_sample.c,ipmi_sample_evt.c,isensor.c,ievents.c,isensor.h,ieve
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -212,7 +215,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libipmiutil.so.*
+%attr(755,root,root) %{_libdir}/libipmiutil.so.1
 
 %files devel
 %defattr(644,root,root,755)
