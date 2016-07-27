@@ -25,7 +25,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
-Requires:	mibs-%{name}
+Suggests:	mibs-%{name}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		mibsdir		/usr/share/mibs
