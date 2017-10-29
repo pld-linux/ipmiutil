@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	2.9.7
+Version:	3.0.7
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -15,8 +15,8 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	b5b60a2f913a21dd04b86ce2a3900928
-Patch0:		%{name}-am.patch
+# Source0-md5:	f055613809d14f9aa07fa23f90ed202a
+
 Patch1:		%{name}-idiscover-ifaces_with_dot_in_name_support.patch
 Patch2:		%{name}-libcrypto.patch
 Patch3:		%{name}-symlink.patch
@@ -106,7 +106,7 @@ Ten pakiet zawiera plik MIB od Intela:
 
 %prep
 %setup -q
-%patch0 -p1
+
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -174,6 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/isensor
 %attr(755,root,root) %{_sbindir}/iserial
 %attr(755,root,root) %{_sbindir}/isol
+%attr(755,root,root) %{_sbindir}/iuser
 %attr(755,root,root) %{_sbindir}/iwdt
 %attr(754,root,root) /etc/rc.d/init.d/ipmi_info
 %attr(754,root,root) /etc/rc.d/init.d/ipmi_port
@@ -211,6 +212,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/isol.8*
 %{_mandir}/man8/isunoem.8*
 %{_mandir}/man8/itsol.8*
+%{_mandir}/man8/iuser.8*
 %{_mandir}/man8/iwdt.8*
 
 %files libs
