@@ -6,8 +6,8 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	3.1.3
-Release:	1
+Version:	3.1.7
+Release:	0.1
 %if %{with gpl}
 License:	GPL v2+
 %else
@@ -15,8 +15,8 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	0d448d14726e2fda0eb9451fb2866a5c
-
+# Source0-md5:	fab260bc834a0f3f9324a6365fc26eca
+Patch0:		openssl-detect.patch
 Patch1:		%{name}-idiscover-ifaces_with_dot_in_name_support.patch
 Patch2:		%{name}-libcrypto.patch
 Patch3:		%{name}-symlink.patch
@@ -106,7 +106,7 @@ Ten pakiet zawiera plik MIB od Intela:
 
 %prep
 %setup -q
-
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1

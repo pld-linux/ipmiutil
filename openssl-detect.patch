@@ -1,0 +1,35 @@
+--- ipmiutil-3.1.7/configure.ac~	2020-09-03 00:26:09.000000000 +0200
++++ ipmiutil-3.1.7/configure.ac	2021-10-17 22:37:06.524093059 +0200
+@@ -424,31 +424,7 @@
+            sed -i 's/# Default-Start:/# Default-Start: 3 4 5/' $init_scripts
+ 	   sed -i 's/# Default-Stop:/# Default-Stop:  0 1 2 6/' $init_scripts
+ 	fi
+-    # The openssl rpm might not be installed
+-	sslver=""
+-    which rpm >/dev/null 2>&1
+-	if test $? -eq 0 ; then
+-		sslver=`rpm -q openssl-devel |cut -f3 -d'-' |cut -f1-2 -d'.'`
+-	fi
+-	if test "$sslver" = ""; then
+-		sslver=`openssl version |awk '{ print $2 }'|cut -f1-2 -d'.'`
+-	fi
+-	if test "$sslver" = "1.1"; then
+-		echo "Detected openssl-$sslver" 
+-		MD2_CFLAGS="-DSKIP_MD2 -DSSL11"
+-	else 
+-	 echo "Detected openssl-$sslver" 
+-	 if test -f "$LIB_DIR/libcrypto.so"; then
+-		strings $LIB_DIR/libcrypto.so | grep EVP_md2 >/dev/null 2>&1
+-		if test $? -ne 0; then
+-			echo "No MD2 detected in openssl libcrypto.so"
+-			MD2_CFLAGS="-DSKIP_MD2"
+-		fi
+-	 else
+-		echo "No openssl $LIB_DIR/libcrypto.so detected"
+-		MD2_CFLAGS="-DSKIP_MD2"
+-	 fi
+-	fi
++	MD2_CFLAGS="-DSKIP_MD2 -DSSL11"
+ 	OS_CFLAGS="-DLINUX $MD2_CFLAGS -fPIC $cfwarn $cfgnu $cfalias $cfhard"
+   else
+      macos=1  # =1 means not mac
