@@ -124,8 +124,9 @@ Ten pakiet zawiera plik MIB od Intela:
 	--enable-shared \
 	--enable-static
 
-%{__make} \
-	CC="%{__cc}"
+%{__make} -j1 \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
