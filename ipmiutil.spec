@@ -7,7 +7,7 @@ Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
 Version:	3.1.7
-Release:	0.1
+Release:	1
 %if %{with gpl}
 License:	GPL v2+
 %else
