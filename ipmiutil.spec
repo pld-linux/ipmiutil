@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	3.1.7
+Version:	3.1.9
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -14,18 +14,18 @@ License:	GPL v2+
 License:	BSD
 %endif
 Group:		Applications/System
-Source0:	http://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	fab260bc834a0f3f9324a6365fc26eca
+Source0:	https://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
+# Source0-md5:	332f688084510771ed79946c815a2ba7
 Patch0:		openssl-detect.patch
 Patch1:		%{name}-idiscover-ifaces_with_dot_in_name_support.patch
 Patch2:		%{name}-libcrypto.patch
 Patch3:		%{name}-symlink.patch
-URL:		http://ipmiutil.sourceforge.net/
+URL:		https://ipmiutil.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
-Suggests:	mibs-%{name}
+Suggests:	mibs-%{name} = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		mibsdir		/usr/share/mibs
@@ -94,7 +94,7 @@ Summary(pl.UTF-8):	Baza danych MIB z narzędzi zarządzających IPMI
 Group:		Applications/System
 Requires:	mibs-dirs
 Requires:	mibs-net-snmp
-Obsoletes:	ipmiutil-mibs
+Obsoletes:	ipmiutil-mibs < 2.5.2-3
 
 %description -n mibs-%{name}
 This package contains MIB file from Intel:

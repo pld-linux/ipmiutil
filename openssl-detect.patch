@@ -1,22 +1,31 @@
---- ipmiutil-3.1.7/configure.ac~	2020-09-03 00:26:09.000000000 +0200
-+++ ipmiutil-3.1.7/configure.ac	2021-10-17 22:37:06.524093059 +0200
-@@ -424,31 +424,7 @@
+--- ipmiutil-3.1.9/configure.ac.orig	2024-02-22 22:18:41.657128891 +0100
++++ ipmiutil-3.1.9/configure.ac	2024-02-22 22:23:42.232167203 +0100
+@@ -427,40 +427,7 @@ else
             sed -i 's/# Default-Start:/# Default-Start: 3 4 5/' $init_scripts
  	   sed -i 's/# Default-Stop:/# Default-Stop:  0 1 2 6/' $init_scripts
  	fi
 -    # The openssl rpm might not be installed
 -	sslver=""
 -    which rpm >/dev/null 2>&1
+-	sslnew=0
 -	if test $? -eq 0 ; then
 -		sslver=`rpm -q openssl-devel |cut -f3 -d'-' |cut -f1-2 -d'.'`
 -	fi
 -	if test "$sslver" = ""; then
 -		sslver=`openssl version |awk '{ print $2 }'|cut -f1-2 -d'.'`
 -	fi
+-	sslrel=`echo $sslver |cut -f1 -d. `
 -	if test "$sslver" = "1.1"; then
 -		echo "Detected openssl-$sslver" 
 -		MD2_CFLAGS="-DSKIP_MD2 -DSSL11"
--	else 
+-		sslnew=1
+-	fi
+-	if test "$sslrel" = "3"; then
+-		echo "Detected openssl-$sslver" 
+-		MD2_CFLAGS="-DSKIP_MD2 -DSSL11"
+-		sslnew=1
+-	fi
+-	if test $sslnew -eq 0 ; then
 -	 echo "Detected openssl-$sslver" 
 -	 if test -f "$LIB_DIR/libcrypto.so"; then
 -		strings $LIB_DIR/libcrypto.so | grep EVP_md2 >/dev/null 2>&1
