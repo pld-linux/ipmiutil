@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	3.1.9
+Version:	3.2.1
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -15,7 +15,7 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	https://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	332f688084510771ed79946c815a2ba7
+# Source0-md5:	ec418e662abfc831c9474fef8d5c184b
 Patch0:		openssl-detect.patch
 Patch1:		%{name}-idiscover-ifaces_with_dot_in_name_support.patch
 Patch2:		%{name}-libcrypto.patch

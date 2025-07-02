@@ -1,12 +1,11 @@
-diff -ruNp ipmiutil-2.9.7.orig/util/idiscover.c ipmiutil-2.9.7/util/idiscover.c
---- ipmiutil-2.9.7.orig/util/idiscover.c	2015-10-12 19:13:02.000000000 +0200
-+++ ipmiutil-2.9.7/util/idiscover.c	2015-11-29 01:24:27.639654074 +0100
-@@ -525,7 +525,7 @@ int sock_init( char *_interface, char *_
+--- ipmiutil-3.2.1/util/idiscover.c.orig	2024-11-30 22:13:57.000000000 +0100
++++ ipmiutil-3.2.1/util/idiscover.c	2025-07-02 18:44:47.906119347 +0200
+@@ -529,7 +529,7 @@ int sock_init( char *_interface, char *_
        }
        if (n < 0) rv = LAN_ERR_OTHER; /*-13*/
     } else { /* valid _interface string */
 -      if (strchr(_interface, '.') != NULL)
 +      if (0)
-         {   /* assume it is an IP address*/
-           if ((rv = inet_pton(AF_INET, _interface, &_srcaddr.sin_addr)) < 0)
-             printerr("inet_pton: %s\n", showlasterr());
+       {   /* assume it is an IP address*/
+          rv = inet_pton(AF_INET, _interface, &_srcaddr.sin_addr);
+          if (rv < 0)
