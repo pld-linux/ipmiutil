@@ -6,7 +6,7 @@
 Summary:	IPMI Management Utilities
 Summary(pl.UTF-8):	Narzędzia zarządzające IPMI
 Name:		ipmiutil
-Version:	3.2.1
+Version:	3.2.2
 Release:	1
 %if %{with gpl}
 License:	GPL v2+
@@ -15,13 +15,13 @@ License:	BSD
 %endif
 Group:		Applications/System
 Source0:	https://downloads.sourceforge.net/ipmiutil/%{name}-%{version}.tar.gz
-# Source0-md5:	ec418e662abfc831c9474fef8d5c184b
+# Source0-md5:	72eb91201f4e2bdb3a188a831f3f86d3
 Patch0:		openssl-detect.patch
 Patch1:		%{name}-idiscover-ifaces_with_dot_in_name_support.patch
 Patch2:		%{name}-libcrypto.patch
 Patch3:		%{name}-symlink.patch
 URL:		https://ipmiutil.sourceforge.net/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
@@ -219,11 +219,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libipmiutil.so.1
+%{_libdir}/libipmiutil.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libipmiutil.so
+%{_libdir}/libipmiutil.so
 %{_includedir}/ipmicmd.h
 %{_examplesdir}/%{name}-%{version}
 
