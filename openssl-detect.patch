@@ -20,7 +20,7 @@
 -		MD2_CFLAGS="-DSKIP_MD2 -DSSL11"
 -		sslnew=1
 -	fi
--	if test "$sslrel" = "3"; then
+-	if test "$sslrel" = "3" -o "$sslrel" = "4"; then
 -		echo "Detected openssl-$sslver" 
 -		MD2_CFLAGS="-DSKIP_MD2 -DSSL11"
 -		sslnew=1
